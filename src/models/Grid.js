@@ -23,37 +23,41 @@ module.exports = class Grid {
     console.log(this.grid);
   }
 
+  esi(fila, col) {
+    this.grid[fila][col + 1] == "." ? null : this.vivas++;
+    this.grid[fila + 1][col + 1] == "." ? null : this.vivas++;
+    this.grid[fila + 1][col] == "." ? null : this.vivas++;
+  }
+
+  verticalesMedio(fila, col) {
+    this.grid[fila][col - 1] == "." ? null : this.vivas++;
+    this.grid[fila][col + 1] == "." ? null : this.vivas++;
+    this.grid[fila + 1][col + 1] == "." ? null : this.vivas++;
+    this.grid[fila + 1][col - 1] == "." ? null : this.vivas++;
+    his.grid[fila + 1][col] == "." ? null : this.vivas++;
+  }
+
   newGrid() {
     for (let fila = 0; fila < this.rows; fila++) {
       for (let col = 0; col < this.columns; col++) {
-
         if (fila == 0) {
           //Primera fila
           if (col == 0) {
             //Primera ESQUINA SUPERIOR izquierda LISTO
-            this.grid[fila][col + 1] == "." ? null : this.vivas++;
-            this.grid[fila + 1][col + 1] == "." ? null : this.vivas++;
-            this.grid[fila + 1][col] == "." ? null : this.vivas++;
+            this.esi(fila, col);
           } else if (
-            col >= this.columns.length - this.columns.length-1 ||
+            col >= this.columns.length - this.columns.length - 1 ||
             col <= this.columns.length - 2
           ) {
             //(VERTICALES DEL MEDIO))
-            this.grid[fila][col - 1] == "." ? null : this.vivas++;
-            this.grid[fila][col + 1] == "." ? null : this.vivas++;
-            this.grid[fila + 1][col + 1] == "." ? null : this.vivas++;
-            this.grid[fila + 1][col - 1] == "." ? null : this.vivas++;
-            this.grid[fila + 1][col] == "." ? null : this.vivas++;
+            this.verticalesMedio(fila, col);
           } //ESQUINA SUPERIOR DERECHA LISTO
           else {
             this.grid[fila][col - 1] == "." ? null : this.vivas++;
             this.grid[fila + 1][col - 1] == "." ? null : this.vivas++;
             this.grid[fila + 1][col] == "." ? null : this.vivas++;
           }
-        } 
-        
-        
-        else if (
+        } else if (
           fila >= this.rows.length - this.rows.length - 1 ||
           fila <= this.rows.length - 2
         ) {
@@ -65,7 +69,7 @@ module.exports = class Grid {
             this.grid[fila + 1][col + 1] == "." ? null : this.vivas++;
             this.grid[fila + 1][col] == "." ? null : this.vivas++;
           } else if (
-            col >= this.columns.length - this.columns.length-1 ||
+            col >= this.columns.length - this.columns.length - 1 ||
             col <= this.columns.length - 2
           ) {
             //(VERTICALES DEL MEDIO))
@@ -116,9 +120,8 @@ module.exports = class Grid {
           this.grid[fila][col]
         );
         console.log(this.vivas);
-        this.vivas=0;
+        this.vivas = 0;
       }
-      
     }
   }
 
